@@ -1,6 +1,6 @@
 // Orion: constellation graph generator
-// Copyright (C) 2015  Luiz Romário Santana Rios <luizromario@gmail.com>
-// Copyright (C) 2015  Paula Patrícia Santana Rios <riospaularios@gmail.com>
+// Copyright (C) 2015--2016  Luiz Romário Santana Rios <luizromario@gmail.com>
+// Copyright (C) 2015--2016  Paula Patrícia Santana Rios <riospaularios@gmail.com>
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -95,6 +95,9 @@ MainWindow::MainWindow(QWidget *parent) :
         const auto angleIncrement = 360.0 / _palavras.rowCount();
         qreal curAngle = 0;
 
+        const auto initialPen = painter.pen();
+        const auto initialBrush = painter.brush();
+
         QFont font;
         font.setPointSize(12);
         painter.setFont(font);
@@ -111,11 +114,15 @@ MainWindow::MainWindow(QWidget *parent) :
         const auto minRadius = qMax(50, estimuloWidth / 2 + 5);
         const auto maxRadius = 180;
 
+        painter.setPen(Qt::gray);
+
         for (int radius = minRadius; radius <= 200; radius += 25) {
             const auto x_y = 200 - radius;
             const auto diam = radius * 2;
             painter.drawArc(x_y, x_y, diam, diam, 0, 5760);
         }
+
+        painter.setPen(initialPen);
 
         for (int i = 0; i < _palavras.rowCount(); ++i) {
             const auto &p = _palavras.row(i);
@@ -127,17 +134,17 @@ MainWindow::MainWindow(QWidget *parent) :
             l.setAngle(curAngle);
             curAngle += angleIncrement;
 
-            const auto curPen = painter.pen();
-
-            painter.setPen(QPen{Qt::red, 8});
-            painter.drawPoint(l.p2());
-            painter.setPen(curPen);
+            painter.setPen(Qt::NoPen);
+            painter.setBrush(Qt::red);
+            painter.drawEllipse(l.p2(), 4, 4);
+            painter.setPen(initialPen);
+            painter.setBrush(initialBrush);
 
             const auto text = pString + "(" + QString::number(pCount) + ")";
             const auto textWidth = painter.fontMetrics().width(text);
             const auto textPoint =
                 l.p2().x() + textWidth >= 400?
-                    l.p2() - QPointF{textWidth, 0} : l.p2();
+                    l.p2() - QPointF{static_cast<qreal>(textWidth), 0} : l.p2();
 
             painter.drawText(textPoint, text);
         }
