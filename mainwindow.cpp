@@ -48,11 +48,21 @@ MainWindow::MainWindow(QWidget *parent) :
         return true;
     });
 
+    _palavras.addRoleFunction<0>(Qt::ToolTipRole, [](const QVariant &)
+    {
+       return "Dê um clique duplo para editar a palavra";
+    });
+
     _palavras.addEditRoleFunction<1>([](short &i, const QVariant &val)
     {
         i = val.toInt();
 
         return true;
+    });
+
+    _palavras.addRoleFunction<1>(Qt::ToolTipRole, [](const QVariant &)
+    {
+        return "Dê um clique duplo para editar a quantidade de ocorrências";
     });
 
     QImage i{400, 400, QImage::Format_RGB32};
