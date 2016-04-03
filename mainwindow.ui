@@ -113,12 +113,18 @@
      <string>Gráfico</string>
     </property>
     <addaction name="actionGerar"/>
+    <addaction name="actionSalvar"/>
    </widget>
    <addaction name="menuGr_fico"/>
   </widget>
   <action name="actionGerar">
    <property name="text">
     <string>Gerar</string>
+   </property>
+  </action>
+  <action name="actionSalvar">
+   <property name="text">
+    <string>Salvar</string>
    </property>
   </action>
  </widget>

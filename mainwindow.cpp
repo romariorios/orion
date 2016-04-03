@@ -18,7 +18,11 @@
 #include "mainwindow.hpp"
 
 #include <limits>
+
+#include <QFileDialog>
+#include <QMessageBox>
 #include <QPainter>
+#include <QStandardPaths>
 
 using namespace std;
 
@@ -172,5 +176,30 @@ MainWindow::MainWindow(QWidget *parent) :
         }
 
         _ui.image->setPixmap(QPixmap::fromImage(std::move(img)));
+    });
+
+    connect(_ui.actionSalvar, &QAction::triggered, [this]()
+    {
+        const auto filename =
+            QFileDialog::getSaveFileName(
+                this,
+                "Salvar gráfico",
+                QStandardPaths::writableLocation(
+                    QStandardPaths::PicturesLocation),
+                "Imagens PNG (*png)");
+
+        if (filename.isEmpty())
+            return;
+
+        const auto filenameWithExt =
+            filename.endsWith(".png")?
+                filename :
+                filename + ".png";
+
+        if (!_ui.image->pixmap()->toImage().save(filenameWithExt))
+            QMessageBox::critical(
+                this,
+                "Falha ao salvar gráfico",
+                "Ocorreu um erro ao salvar o gráfico");
     });
 }
