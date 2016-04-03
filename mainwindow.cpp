@@ -107,6 +107,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
         const auto estimuloText = _ui.estimulo->text();
         const auto estimuloWidth = painter.fontMetrics().width(estimuloText);
+        const auto estimuloHeight = painter.fontMetrics().height();
         const QPoint estimuloPoint{200 - estimuloWidth / 2, 200};
 
         painter.drawText(estimuloPoint, estimuloText);
@@ -140,13 +141,22 @@ MainWindow::MainWindow(QWidget *parent) :
             painter.setPen(initialPen);
             painter.setBrush(initialBrush);
 
-            const auto text = pString + "(" + QString::number(pCount) + ")";
+            const auto palavraPoint = l.p2();
+            const auto text = pString + " (" + QString::number(pCount) + ")";
             const auto textWidth = painter.fontMetrics().width(text);
-            const auto textPoint =
-                l.p2().x() + textWidth >= 400?
-                    l.p2() - QPointF{static_cast<qreal>(textWidth), 0} : l.p2();
+            const auto textHeight = painter.fontMetrics().height();
+            const auto textPointX =
+                palavraPoint.x() + textWidth >= 400 || (
+                    palavraPoint.y() + textHeight >= 200 &&
+                    palavraPoint.y() < 200 + estimuloHeight &&
+                    palavraPoint.x() + textWidth >= estimuloPoint.x() &&
+                    palavraPoint.x() < estimuloPoint.x() + estimuloWidth
+                )?
+                    palavraPoint.x() - static_cast<qreal>(textWidth) : palavraPoint.x();
+            const auto textPointY = l.p2().y();
 
-            painter.drawText(textPoint, text);
+
+            painter.drawText(QPointF{textPointX, textPointY}, text);
         }
 
         _ui.image->setPixmap(QPixmap::fromImage(std::move(img)));
