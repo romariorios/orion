@@ -65,6 +65,8 @@ MainWindow::MainWindow(QWidget *parent) :
         return "Dê um clique duplo para editar a quantidade de ocorrências";
     });
 
+    connect(_ui.gerarGrafico, &QPushButton::clicked, _ui.actionGerar, &QAction::triggered);
+
     QImage i{400, 400, QImage::Format_RGB32};
 
     i.fill(Qt::white);
@@ -83,7 +85,7 @@ MainWindow::MainWindow(QWidget *parent) :
             section, section == 0? Qt::AscendingOrder : Qt::DescendingOrder);
     });
 
-    connect(_ui.gerarGrafico, &QPushButton::clicked, [this]()
+    connect(_ui.actionGerar, &QAction::triggered, [this]()
     {
         int minValue = numeric_limits<int>::max(),
             maxValue = 0;
