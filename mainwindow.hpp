@@ -1,6 +1,6 @@
 // Orion: constellation graph generator
-// Copyright (C) 2015  Luiz Romário Santana Rios <luizromario@gmail.com>
-// Copyright (C) 2015  Paula Patrícia Santana Rios <riospaularios@gmail.com>
+// Copyright (C) 2015--2016  Luiz Romário Santana Rios <luizromario@gmail.com>
+// Copyright (C) 2015--2016  Paula Patrícia Santana Rios <riospaularios@gmail.com>
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,11 +19,10 @@
 #define MAINWINDOW_HPP
 
 #include <QMainWindow>
+#include "ui_mainwindow.h"
 
 #include <QSortFilterProxyModel>
-
-#include "ui_mainwindow.h"
-#include "qtmvt.hpp"
+#include <qtmvt.hpp>
 
 class MainWindow : public QMainWindow
 {

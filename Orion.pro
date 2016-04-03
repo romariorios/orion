@@ -17,7 +17,8 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp
 
-HEADERS  += mainwindow.hpp \
-    qtmvt.hpp
+HEADERS  += mainwindow.hpp
+
+INCLUDEPATH += 3rdparty/qtmvt
 
 FORMS    += mainwindow.ui

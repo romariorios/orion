@@ -1,0 +1,3 @@
+[submodule "3rdparty/qtmvt"]
+	path = 3rdparty/qtmvt
+	url = https://github.com/romariorios/qtmvt.git
