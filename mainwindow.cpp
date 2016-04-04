@@ -109,7 +109,7 @@ MainWindow::MainWindow(QWidget *parent) :
         QPainter painter{&img};
         painter.setRenderHint(QPainter::Antialiasing);
         const auto angleIncrement = 360.0 / _palavras.rowCount();
-        qreal curAngle = 0;
+        qreal curAngle = 45.0;
 
         const auto initialPen = painter.pen();
         const auto initialBrush = painter.brush();
