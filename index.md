@@ -48,8 +48,8 @@ Romário Rios (estudante de Ciência da Computação da UFBA) se utilizando a li
 
 Segue a interface do programa e um exemplo de gráfico gerado (na opção "Gráfico > Salvar", apenas a imagem do alvo é armazenada):
 
-![Orion ao ser inicializado](http://wstaw.org/m/2016/04/19/orionvazio.png)
-![Orion com palavras e alvo](http://wstaw.org/m/2016/04/19/orionpalavras.png)
+![Orion ao ser inicializado](./orionvazio.png)
+![Orion com palavras e alvo](./orionpalavras.png)
 
 ## Licença
 
