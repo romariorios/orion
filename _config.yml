@@ -1,0 +1,8 @@
+title: Orion
+description: Gerador de gráfico de alvo em constelação de atributos
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-architect
+
+gems:
+  - jekyll-mentions
